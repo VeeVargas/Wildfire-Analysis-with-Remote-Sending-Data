@@ -6,7 +6,7 @@
 ## Dataset Overview
 
 
-## Business objectives and constraints
+## Business Objectives and Constraints
 
 
 ## Exploratory Data analysis
