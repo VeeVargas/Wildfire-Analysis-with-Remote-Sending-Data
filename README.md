@@ -1,4 +1,4 @@
-# Australian-Wildfire-Analysis-with-Remote-Sending-Data
+# Wildfire-Analysis-with-Remote-Sending-Data
 
 ## High-Level Overview
 
