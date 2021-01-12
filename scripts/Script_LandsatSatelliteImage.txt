@@ -1,0 +1,35 @@
+// Lab: Landsat Satellite Image
+
+// Get a feature collection 
+var countries = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017');
+var USA = countries.filter(ee.Filter.eq('country_na', 'United States'));
+
+// Load a Landsat 8 collection for the United States
+var collection = ee.ImageCollection('LANDSAT/LC8_L1T_TOA')
+    .filterBounds(USA)
+    .filterDate('2017-1-01', '2017-04-30');
+
+// Compute a minimum image and display
+var median = collection.min();
+Map.centerObject(USA, 8);
+Map.addLayer(median, {bands: ['B4', 'B3', 'B2'], max: 0.3}, 'Landsat Satellite (USA)');
+_________________
+// Get a feature collection 
+var countries = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017');
+var AUS = countries.filter(ee.Filter.eq('country_na', 'Australia'));
+
+// Load a Landsat 8 collection for the Australia
+var collection = ee.ImageCollection('LANDSAT/LC8_L1T_TOA')
+    .filterBounds(AUS)
+    .filterDate('2017-1-01', '2017-04-30');
+
+print(collection)   
+
+
+// calculates min value for each pixel
+var median = collection.min();
+// zoom region
+Map.centerObject(AUS, 8);
+// display map, rgb bands with .3 reflectance value
+Map.addLayer(median, {bands: ['B4', 'B3', 'B2'], max: 0.3}, 'Landsat Satellite (AUS)');
+    

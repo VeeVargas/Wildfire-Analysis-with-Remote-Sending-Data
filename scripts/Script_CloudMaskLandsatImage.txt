@@ -1,0 +1,17 @@
+
+// Lab: Cloud Mask Landsat Image
+
+// Load a cloudy Landsat scene.
+var rawLandsat = ee.Image('LANDSAT/LC8_L1T_TOA/LC80220352017027LGN00');
+Map.addLayer(rawLandsat, {bands: ['B4', 'B3', 'B2'], max: 0.4}, 'Raw Landsat', false);
+Map.centerObject(rawLandsat);
+
+// Add a cloud score band.It is automatically called 'cloud'.
+var scored = ee.Algorithms.Landsat.simpleCloudScore(rawLandsat);
+
+// Create a mask from the cloud score and combine it with the image mask.
+var mask = scored.select(['cloud']).lte(20);
+
+// Apply the mask to the image and display the result.
+var masked = rawLandsat.updateMask(mask);
+Map.addLayer(masked, {bands: ['B4', 'B3', 'B2'], max: 0.4}, 'Cloud Masked');
