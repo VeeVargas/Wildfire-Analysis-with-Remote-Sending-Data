@@ -1,7 +1,7 @@
 # Wildfire-Analysis-with-Remote-Sending-Data
 
 ## High-Level Overview
-Current industry level wildfire models use computational fluid dynamics to simulate landscape-scale fires on a 1m cubic voxel grid. While they do a great job at modeling the fires, the have two major limitations. First, they require an increduble amount of resources  to run. Second, even with supercomputers, they run slower than real time, making them useless for prediction.   
+Current industry level wildfire models use computational fluid dynamics to simulate landscape-scale fires, typically on a 1m cubic voxel grid. While they do a great job at modeling the fires, the have two major limitations. First, they require an increduble amount of resources  to run. Second, even with supercomputers, they run slower than real time, making them useless for prediction.   
 
 Forecasting fire size at the right time can help firefighters allocate resources and getting an area estimate of an ongoing fire can be very beneficial in preparing the mitigation strategies.
 
