@@ -19,7 +19,7 @@ Three different types of resolution have to be considered:
 * Temporal resolution
 
 
-## Preliminary Assessment 
+## Goals
 Spot the fire: The first part of this project will focus on spotting or detecting wildfires.
 > Fire and non-fire labels were derived from the Terra MODIS Terra Thermal Anomalies & Fire product, which maps fires based on their pre- and post-fire infrared signals.
 
