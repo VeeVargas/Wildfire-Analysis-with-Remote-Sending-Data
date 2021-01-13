@@ -1,0 +1,30 @@
+sourceCollection.find(query).toArray((queryError, queryResults) => {
+    if (queryError) {
+        callback(queryError);
+    } else {
+        async.mapLimit(queryResults, CLIMATE_CONFIG.limit, (item, mapCb) => {
+            const readStream = streamify([item]);
+            readStream
+                .pipe(getClimateDataEach(CLIMATE_CONFIG))
+                .pipe(saveToDBEach(climateOutputDbConfig))
+                .on('error', (err) => {
+                    mapCb(err);
+                })
+                .on('finish', () => {
+                    logger.info(`done processing event`);
+                    mapCb();
+                });
+        }, (mapErr, _mapRes) => {
+            if (mapErr) {
+                callback(mapErr);
+            } else {
+                callback();
+            }
+            outputDbClient.close();
+            sourceDbClient.close();
+        });
+    }
+});
+
+
+

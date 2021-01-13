@@ -1,0 +1,40 @@
+/**
+ * Recursively downloads historical weather data for a given geolocation and time interval using the Dark Sky API
+ * @param {Object} results - The results object for which data should be accumulated into
+ * @param {String} apiKey - A Dark Sky api key
+ * @param {Date} startDate - The earliest date for which weather data should be retrieved
+ * @param {Date} endDate - The latest date for which weather data should be retrieved
+ * @param {Number} latitude - The latitude of the requested location
+ * @param {Number} longitude - The longitude of the requested location
+ * @param {String} interval - A string representing the time granularity to include per request
+ * @param {String} excludedIntervals - The string of blocks to not include per request
+ * @param {Function} cb - The next function to be called
+ */
+function download(results, apiKey, startDate, endDate, latitude, longitude, interval, excludedIntervals, cb) {
+    const time = startDate.format();
+    const url = `https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude},${time}?exclude=${excludedIntervals}`;
+    request(url, (requestError, _res, body) => {
+        results.requests += 1;
+        if (requestError) {
+            logger.warn('yo, there was an error in the dark sky api request');
+            cb({ error: requestError });
+        } else {
+            let obj = {};
+            try {
+                obj = JSON.parse(body);
+            } catch (err) {
+                logger.debug(err);
+                logger.debug(body);
+            }
+            results[interval].push(obj);
+            if (startDate.isSameOrAfter(endDate)) {
+                // base case: date equal or overshot => return results
+                cb(null, results);
+            } else {
+                // otherwise, download data for the next day
+                const newStartDate = startDate.clone().add(1, 'days');
+                download(results, apiKey, newStartDate, endDate, latitude, longitude, interval, excludedIntervals, cb);
+            }
+        }
+    });
+}
