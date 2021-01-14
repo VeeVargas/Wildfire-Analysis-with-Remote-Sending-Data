@@ -1,5 +1,5 @@
 
-// Lab: Cloud Mask Landsat Image
+// Cloud Mask Landsat Image
 
 // Load a cloudy Landsat scene.
 var rawLandsat = ee.Image('LANDSAT/LC8_L1T_TOA/LC80220352017027LGN00');
