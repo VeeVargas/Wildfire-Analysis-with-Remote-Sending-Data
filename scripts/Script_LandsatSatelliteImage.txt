@@ -1,18 +1,18 @@
-// Lab: Landsat Satellite Image
+// Landsat Satellite Image
 
 // Get a feature collection 
 var countries = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017');
-var USA = countries.filter(ee.Filter.eq('country_na', 'United States'));
+var Australia = countries.filter(ee.Filter.eq('country_na', 'United Australia'));
 
 // Load a Landsat 8 collection for the United States
 var collection = ee.ImageCollection('LANDSAT/LC8_L1T_TOA')
-    .filterBounds(USA)
-    .filterDate('2017-1-01', '2017-04-30');
+    .filterBounds(Australia)
+    .filterDate('2017-01-01', '2020-01-01');
 
 // Compute a minimum image and display
 var median = collection.min();
-Map.centerObject(USA, 8);
-Map.addLayer(median, {bands: ['B4', 'B3', 'B2'], max: 0.3}, 'Landsat Satellite (USA)');
+Map.centerObject(Australia, 8);
+Map.addLayer(median, {bands: ['B4', 'B3', 'B2'], max: 0.3}, 'Landsat Satellite (Australia)');
 _________________
 // Get a feature collection 
 var countries = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017');
