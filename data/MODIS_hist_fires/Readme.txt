@@ -3,7 +3,6 @@ var box = /* color: #d63000 */ee.Geometry.Polygon(
           [-124.60187409936117, 36.815440789035094],
           [-116.60382722436117, 36.815440789035094],
           [-116.58185456811117, 41.9897097309874]]]),
-    us_counties = ee.FeatureCollection("users/campolojake/cb_2017_us_county_500k"),
     fire_terra = ee.ImageCollection("MODIS/006/MOD14A1"),
     fire_aqua = ee.ImageCollection("MODIS/006/MYD14A1"),
     ls5 = ee.ImageCollection("LANDSAT/LT05/C01/T1_SR"),
@@ -13,7 +12,6 @@ var box = /* color: #d63000 */ee.Geometry.Polygon(
     refl_aqua = ee.ImageCollection("MODIS/006/MYD09GA"),
     chirps = ee.ImageCollection("UCSB-CHG/CHIRPS/DAILY"),
     evapotrans = ee.ImageCollection("MODIS/006/MOD16A2"),
-    drought = ee.ImageCollection("IDAHO_EPSCOR/PDSI"),
     gldas21 = ee.ImageCollection("NASA/GLDAS/V021/NOAH/G025/T3H"),
     gldas2 = ee.ImageCollection("NASA/GLDAS/V20/NOAH/G025/T3H"),
     lc = ee.ImageCollection("MODIS/006/MCD12Q1"),
@@ -24,12 +22,7 @@ var box = /* color: #d63000 */ee.Geometry.Polygon(
           [29.245055762948482, 9.221276087181606]]]);
 
 /*
-  Collect climate and land surface reflectance variables for fire prediction project, CS229.
-*/
-
-// Isolate Northern California region of interest
-var cali = us_counties.filterMetadata("STATEFP", "equals", "06").union().geometry();
-var roi = cali.intersection(box);
+  Collect climate and land surface reflectance variables for fire prediction project
 
 // Prepare inputs
 fire_terra = fire_terra.select("FireMask");
