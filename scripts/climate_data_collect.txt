@@ -1,5 +1,5 @@
 /**
- * Recursively downloads historical weather data for a given geolocation and time interval using the Dark Sky API
+ * Recursively downloads historical weather data for a given geolocation and time interval 
  * @param {Object} results - The results object for which data should be accumulated into
  * @param {String} apiKey - A Dark Sky api key
  * @param {Date} startDate - The earliest date for which weather data should be retrieved
